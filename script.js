@@ -132,8 +132,8 @@ const BN = {
   'team.lead': 'অ্যাক্সিয়ন বাংলাদেশের পণ্য দিকনির্দেশনা, সরবরাহকারী সম্পর্ক ও পাইকারি অভিজ্ঞতা গড়ে তোলা মানুষদের সাথে পরিচিত হোন।',
   'team.note': 'সম্পাদনযোগ্য প্রোফাইল প্লেসহোল্ডার',
   'team.founder': 'প্রতিষ্ঠাতা',
-  'team.cofounder': 'সহ-প্রতিষ্ঠাতা',
-  'team.add': 'অনুমোদিত ছবি যোগ করুন',
+  'team.coo': 'সহ-প্রতিষ্ঠাতা ও সিওও',
+  'team.cmo': 'সহ-প্রতিষ্ঠাতা ও সিএমও',
   'team.name': '[পূর্ণ নাম]',
   'team.1d': 'ভিশন, সরবরাহকারী সম্পর্ক ও ব্যবসায়িক দিকনির্দেশনা',
   'team.2d': 'বাণিজ্যিক কার্যক্রম ও পাইকারি অংশীদারিত্ব',
@@ -235,8 +235,11 @@ document.querySelectorAll('.lang__btn').forEach((btn) => {
   btn.addEventListener('click', () => setLang(btn.dataset.lang));
 });
 
-let savedLang = 'en';
-try { savedLang = localStorage.getItem(LANG_KEY) || 'en'; } catch (e) { /* storage unavailable */ }
+// ?lang=bn in the URL wins over the remembered choice, so links can share a language.
+let savedLang = new URLSearchParams(location.search).get('lang');
+if (!savedLang) {
+  try { savedLang = localStorage.getItem(LANG_KEY) || 'en'; } catch (e) { savedLang = 'en'; }
+}
 if (savedLang !== 'en') setLang(savedLang);
 
 /* ------------------------------------------------------------------ */
