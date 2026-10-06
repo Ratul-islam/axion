@@ -186,12 +186,61 @@ const BN = {
   'ft.copy': '© অ্যাক্সিয়ন বাংলাদেশ। সর্বস্বত্ব সংরক্ষিত।',
   'ft.tagline': 'সৌন্দর্য ব্যবসার জন্য পেশাদার সরঞ্জাম।',
   'ft.top': 'উপরে ফিরুন',
+
+  'advisor.find': 'আমার সেটআপ খুঁজুন',
+  'list.add': 'তালিকায় যোগ করুন',
+  'list.added': 'যোগ হয়েছে',
+  'list.title': 'আপনার সরঞ্জাম তালিকা',
+  'list.send': 'এগুলোর কোটেশন চান',
+  'list.clear': 'তালিকা মুছুন',
+  'list.remove': 'তালিকা থেকে সরান',
+  'list.addedMsg': '{name} তালিকায় যোগ হয়েছে।',
+  'list.removedMsg': '{name} তালিকা থেকে সরানো হয়েছে।',
+  'list.cleared': 'তালিকা খালি করা হয়েছে।',
+
+  'finder.title': 'আপনার সেটআপ খুঁজুন',
+  'finder.intro': 'তিনটি ছোট প্রশ্ন। উত্তর দিলেই পাবেন একটি প্রাথমিক সরঞ্জাম তালিকা, যা আমাদের টিমকে পাঠাতে পারবেন।',
+  'finder.q1': 'আপনি কী পরিকল্পনা করছেন?',
+  'finder.g1': 'নতুন সেলুন খুলছি',
+  'finder.g2': 'ফেসিয়াল ট্রিটমেন্ট যোগ করছি',
+  'finder.g3': 'হেয়ার স্টেশন আপগ্রেড করছি',
+  'finder.g4': 'পুনঃবিক্রয়ের জন্য কিনছি',
+  'finder.q2': 'আপনি কোন কোন সেবা দেবেন?',
+  'finder.q2hint': 'প্রযোজ্য সবগুলো বেছে নিন।',
+  'finder.s1': 'অ্যাডভান্সড ফেসিয়াল',
+  'finder.s2': 'স্কিন প্রেপ ও স্টিমিং',
+  'finder.s3': 'ব্লো-ড্রাই ও ফিনিশিং',
+  'finder.s4': 'স্ট্রেইটনিং ও স্টাইলিং',
+  'finder.s5': 'ট্রিটমেন্ট রুমের প্রয়োজনীয় সামগ্রী',
+  'finder.q3': 'কাজের চাপ কেমন হবে?',
+  'finder.q3hint': 'এতে আমাদের টিম সঠিক ফরম্যাট ও পরিমাণ সাজেস্ট করতে পারবে।',
+  'finder.w1': 'সবে শুরু করছি',
+  'finder.w1d': 'দিনে অল্প কয়েকজন ক্লায়েন্ট',
+  'finder.w2': 'নিয়মিত বুকিং',
+  'finder.w2d': 'দিনের বেশিরভাগ সময় বুকড',
+  'finder.w3': 'ব্যস্ত, একাধিক স্টেশন',
+  'finder.w3d': 'সারাদিন একসাথে কয়েকজন ক্লায়েন্ট',
+  'finder.result': 'আপনার প্রাথমিক তালিকা',
+  'finder.resultNote': 'কনফিগারেশন, পরিমাণ ও প্রাপ্যতা আমাদের টিম নিশ্চিত করবে।',
+  'finder.addN': '{n}টি তালিকায় যোগ করুন',
+  'finder.back': 'পেছনে',
+  'finder.next': 'পরবর্তী',
+  'finder.see': 'তালিকা দেখুন',
+  'finder.restart': 'আবার শুরু করুন',
+
+  'nudge.text': 'সেলুনের পরিকল্পনা করছেন? তিনটি প্রশ্নের উত্তর দিন, পেয়ে যান একটি প্রাথমিক সরঞ্জাম তালিকা।',
 };
 
 // Strings only used from script; English values live here rather than in the HTML.
 const EN_EXTRA = {
   'form.invalid': 'Please fill in all fields.',
   'form.opened': 'Your inquiry has opened in your email app. Press “Send” to submit it.',
+  'list.remove': 'Remove from list',
+  'list.addedMsg': '{name} added to your list.',
+  'list.removedMsg': '{name} removed from your list.',
+  'list.cleared': 'Your list is now empty.',
+  'finder.addN': 'Add {n} to my list',
+  'finder.see': 'See my list',
 };
 
 /* ------------------------------------------------------------------ */
@@ -205,15 +254,20 @@ let currentLang = 'en';
 
 // Snapshot the English markup once so switching back is lossless.
 textNodes.forEach((el) => { el.dataset.en = el.innerHTML; });
+// English strings by key, for text the script builds itself (list items, finder results).
+const EN = {};
+textNodes.forEach((el) => { if (!(el.dataset.i18n in EN)) EN[el.dataset.i18n] = el.dataset.en; });
 placeholderNodes.forEach((el) => { el.dataset.enPh = el.placeholder; });
 
 function t(key) {
   if (currentLang === 'bn' && BN[key]) return BN[key];
-  return EN_EXTRA[key] || key;
+  return EN_EXTRA[key] || EN[key] || key;
 }
 
 function setLang(lang) {
   currentLang = lang === 'bn' ? 'bn' : 'en';
+  // motion.js listens for these to restore split text before it is replaced, then re-measure.
+  document.dispatchEvent(new CustomEvent('axion:beforelang'));
   document.documentElement.lang = currentLang;
 
   textNodes.forEach((el) => {
@@ -229,6 +283,7 @@ function setLang(lang) {
   });
 
   try { localStorage.setItem(LANG_KEY, currentLang); } catch (e) { /* storage unavailable */ }
+  document.dispatchEvent(new CustomEvent('axion:lang', { detail: { lang: currentLang } }));
 }
 
 document.querySelectorAll('.lang__btn').forEach((btn) => {
@@ -248,21 +303,42 @@ if (savedLang !== 'en') setLang(savedLang);
 
 const menuToggle = document.querySelector('.header__toggle');
 const mobileMenu = document.getElementById('mobile-menu');
+const menuClose = mobileMenu.querySelector('.mobile-menu__close');
 
+// `menu-open` on <html> shows the panel and locks page scroll. motion.js listens for
+// `axion:menu` to animate it; without motion the CSS shows and hides it instantly.
 function setMenu(open) {
+  if (open === document.documentElement.classList.contains('menu-open')) return;
   menuToggle.setAttribute('aria-expanded', String(open));
   menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  mobileMenu.hidden = !open;
+  document.documentElement.classList.toggle('menu-open', open);
+  document.dispatchEvent(new CustomEvent('axion:menu', { detail: { open } }));
+  if (open) menuClose.focus({ preventScroll: true });
+  else if (mobileMenu.contains(document.activeElement)) menuToggle.focus({ preventScroll: true });
 }
 
-menuToggle.addEventListener('click', () => {
-  setMenu(menuToggle.getAttribute('aria-expanded') !== 'true');
-});
+menuToggle.addEventListener('click', () => setMenu(true));
+menuClose.addEventListener('click', () => setMenu(false));
 mobileMenu.addEventListener('click', (e) => {
   if (e.target.closest('a')) setMenu(false);
 });
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') setMenu(false);
+});
+
+// Keep keyboard focus inside the open menu.
+mobileMenu.addEventListener('keydown', (e) => {
+  if (e.key !== 'Tab') return;
+  const items = mobileMenu.querySelectorAll('a[href], button');
+  const first = items[0];
+  const last = items[items.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
 });
 window.matchMedia('(min-width: 1181px)').addEventListener('change', (e) => {
   if (e.matches) setMenu(false);
@@ -308,3 +384,326 @@ form.addEventListener('submit', (e) => {
 form.addEventListener('input', (e) => {
   if (e.target.value.trim()) e.target.removeAttribute('aria-invalid');
 });
+
+/* ------------------------------------------------------------------ */
+/* Equipment list (collected while browsing, remembered on this device) */
+/* ------------------------------------------------------------------ */
+
+// Everything that can go on the list: the translation key for its name and its photo.
+const CATALOG = {
+  hydrafacial: { key: 'cat.1t', img: 'assets/categories/Product%20image.png' },
+  steamer: { key: 'cat.2t', img: 'assets/categories/Product%20image%20(2).png' },
+  dryer: { key: 'cat.3t', img: 'assets/categories/Product%20image%20(3).png' },
+  straightener: { key: 'cat.4t', img: 'assets/categories/Product%20image%20(1).png' },
+  machinery: { key: 'cat.5t', img: 'assets/categories/Product%20image%20(4).png' },
+  'facial-platform': { key: 'feat.1t', img: 'assets/featured/Product%20image.png' },
+  'steamer-lamp': { key: 'feat.2t', img: 'assets/featured/Product%20image%20(1).png' },
+  'styling-kit': { key: 'feat.3t', img: 'assets/featured/Product%20image%20(2).png' },
+};
+const LIST_KEY = 'axion-list';
+
+const shortlist = document.querySelector('.shortlist');
+const dock = shortlist.querySelector('.shortlist__dock');
+const listPanel = shortlist.querySelector('.shortlist__panel');
+const listStatus = document.querySelector('[data-list-status]');
+// Translations are stored as HTML (entities, <br>); `plain` gives readable text and `esc` makes text safe to put back into markup.
+const decoder = document.createElement('template');
+const plain = (key) => { decoder.innerHTML = t(key); return decoder.content.textContent; };
+const esc = (text) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+const itemName = (id) => plain(CATALOG[id].key);
+
+let list = [];
+try { list = JSON.parse(localStorage.getItem(LIST_KEY)) || []; } catch (e) { list = []; }
+list = list.filter((id) => CATALOG[id]);
+
+function announce(message) {
+  listStatus.textContent = message;
+}
+
+function renderList() {
+  try { localStorage.setItem(LIST_KEY, JSON.stringify(list)); } catch (e) { /* storage unavailable */ }
+
+  document.querySelectorAll('[data-add]').forEach((btn) => {
+    const id = btn.dataset.add;
+    btn.setAttribute('aria-pressed', String(list.includes(id)));
+    btn.setAttribute('aria-label', `${plain('list.add')}: ${itemName(id)}`);
+  });
+
+  shortlist.hidden = list.length === 0;
+  if (!list.length) setListPanel(false);
+  shortlist.querySelector('.shortlist__count').textContent = list.length;
+  shortlist.querySelector('.shortlist__thumbs').innerHTML = list.slice(-3)
+    .map((id) => `<img src="${CATALOG[id].img}" alt="">`).join('');
+  shortlist.querySelector('.shortlist__items').innerHTML = list.map((id) => `
+    <li>
+      <img src="${CATALOG[id].img}" alt="">
+      <span>${esc(itemName(id))}</span>
+      <button type="button" class="shortlist__remove" data-remove="${id}" aria-label="${esc(`${plain('list.remove')}: ${itemName(id)}`)}">
+        <svg class="icon"><use href="#i-x"/></svg>
+      </button>
+    </li>`).join('');
+}
+
+// `from` is the element the item came from, so motion.js can fly its photo into the dock.
+function setInList(id, on, from) {
+  if (on === list.includes(id)) return;
+  list = on ? [...list, id] : list.filter((x) => x !== id);
+  renderList();
+  announce(t(on ? 'list.addedMsg' : 'list.removedMsg').replace('{name}', itemName(id)));
+  document.dispatchEvent(new CustomEvent('axion:list', { detail: { id, added: on, from } }));
+}
+
+function setListPanel(open) {
+  listPanel.hidden = !open;
+  dock.setAttribute('aria-expanded', String(open));
+}
+
+document.addEventListener('click', (e) => {
+  const add = e.target.closest('[data-add]');
+  if (add) setInList(add.dataset.add, !list.includes(add.dataset.add), add);
+});
+dock.addEventListener('click', () => setListPanel(listPanel.hidden));
+shortlist.addEventListener('click', (e) => {
+  const remove = e.target.closest('[data-remove]');
+  if (remove) setInList(remove.dataset.remove, false);
+  if (e.target.closest('[data-list-clear]')) {
+    list = [];
+    renderList();
+    announce(t('list.cleared'));
+    dock.focus();
+  }
+  if (e.target.closest('[data-list-send]')) {
+    setListPanel(false);
+    goToQuote(list.map(itemName).join(', '));
+  }
+});
+// composedPath, because a remove button is already gone from the DOM by the time this runs.
+document.addEventListener('click', (e) => {
+  if (!listPanel.hidden && !e.composedPath().includes(shortlist)) setListPanel(false);
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !listPanel.hidden) {
+    setListPanel(false);
+    dock.focus();
+  }
+});
+
+// Fill the quote form's equipment field, then bring the form into view.
+function goToQuote(equipment) {
+  const field = form.querySelector('[name="equipment"]');
+  field.value = equipment;
+  field.removeAttribute('aria-invalid');
+  const target = document.getElementById('inquiry');
+  // motion.js takes over the scroll when smooth scrolling is running.
+  if (document.dispatchEvent(new CustomEvent('axion:goto', { detail: { target }, cancelable: true }))) {
+    target.scrollIntoView({ behavior: 'smooth' });
+  }
+  const firstEmpty = [...form.querySelectorAll('input[required]')].find((input) => !input.value.trim());
+  (firstEmpty || field).focus({ preventScroll: true });
+}
+
+/* ------------------------------------------------------------------ */
+/* Setup finder                                                        */
+/* ------------------------------------------------------------------ */
+
+// Which list items each service points to, and which services a goal starts with.
+const SERVICE_ITEMS = {
+  facials: ['hydrafacial', 'facial-platform'],
+  skin: ['steamer', 'steamer-lamp'],
+  drying: ['dryer'],
+  styling: ['straightener', 'styling-kit'],
+  room: ['machinery'],
+};
+const GOAL_SERVICES = {
+  new: ['facials', 'skin', 'room'],
+  facial: ['facials', 'skin'],
+  hair: ['drying', 'styling'],
+  resell: [],
+};
+const FINDER_KEY = 'axion-finder-seen';
+
+const finder = document.getElementById('finder');
+const finderForm = finder.querySelector('.finder__form');
+const steps = [...finder.querySelectorAll('.finder__step')];
+const picksEl = finder.querySelector('.finder__picks');
+const nextBtn = finder.querySelector('[data-finder-next]');
+let step = 1;
+let picks = [];
+
+const checked = (name) => [...finderForm.querySelectorAll(`[name="${name}"]:checked`)].map((input) => input.value);
+const optionLabel = (input) => input.closest('label').querySelector('.opt__label').textContent;
+const checkedLabel = (name) => {
+  const input = finderForm.querySelector(`[name="${name}"]:checked`);
+  return input ? optionLabel(input) : '';
+};
+
+function stepReady() {
+  if (step === 1) return checked('goal').length > 0;
+  if (step === 2) return checked('services').length > 0;
+  if (step === 3) return checked('load').length > 0;
+  return true;
+}
+
+function renderPicks() {
+  const services = checked('services');
+  picks = [];
+  services.forEach((service) => SERVICE_ITEMS[service].forEach((id) => {
+    if (!picks.some((p) => p.id === id)) picks.push({ id, service });
+  }));
+  const serviceLabel = (service) => optionLabel(finderForm.querySelector(`[name="services"][value="${service}"]`));
+  finder.querySelector('.finder__summary').textContent = [checkedLabel('goal'), checkedLabel('load')].filter(Boolean).join(' · ');
+  picksEl.innerHTML = picks.map(({ id, service }) => `
+    <li>
+      <label class="pick">
+        <input type="checkbox" value="${id}" checked>
+        <img src="${CATALOG[id].img}" alt="">
+        <span class="pick__text"><span class="pick__name">${esc(itemName(id))}</span><span class="pick__why">${esc(serviceLabel(service))}</span></span>
+        <span class="pick__tick"><svg class="icon"><use href="#i-check"/></svg></span>
+      </label>
+    </li>`).join('');
+  updateAddLabel();
+}
+
+function chosenPicks() {
+  return [...picksEl.querySelectorAll('input:checked')].map((input) => input.value);
+}
+
+function updateAddLabel() {
+  const n = chosenPicks().length;
+  finder.querySelector('.finder__add-label').textContent = t('finder.addN').replace('{n}', n);
+  finder.querySelector('[data-finder-add]').disabled = n === 0;
+  finder.querySelector('[data-finder-send]').disabled = n === 0;
+}
+
+function showStep(next) {
+  const dir = next >= step ? 1 : -1;
+  step = next;
+  if (step === 4) renderPicks();
+  steps.forEach((el) => { el.hidden = Number(el.dataset.step) !== step; });
+  const result = step === 4;
+  finder.querySelector('.finder__num').textContent = Math.min(step, 3);
+  finder.querySelector('.finder__count').hidden = result;
+  finder.style.setProperty('--finder-progress', String(step / 4));
+  finder.querySelector('[data-finder-back]').hidden = step === 1 || result;
+  finder.querySelector('[data-finder-restart]').hidden = !result;
+  nextBtn.hidden = result;
+  nextBtn.disabled = !stepReady();
+  finder.querySelector('.finder__next-label').textContent = t(step === 3 ? 'finder.see' : 'finder.next');
+  finder.querySelector('[data-finder-add]').hidden = !result;
+  finder.querySelector('[data-finder-send]').hidden = !result;
+  document.dispatchEvent(new CustomEvent('axion:finderstep', { detail: { step, dir, el: steps[step - 1] } }));
+}
+
+function openFinder() {
+  hideNudge(true);
+  if (finder.open) return;
+  finderForm.reset();
+  showStep(1);
+  finder.showModal();
+  document.documentElement.classList.add('finder-open');
+  document.dispatchEvent(new CustomEvent('axion:finder', { detail: { open: true } }));
+}
+
+// motion.js may cancel this event to animate the panel out, then closes the dialog itself.
+function closeFinder() {
+  if (!finder.open) return;
+  if (document.dispatchEvent(new CustomEvent('axion:finderclose', { cancelable: true }))) finder.close();
+}
+
+finder.addEventListener('close', () => {
+  document.documentElement.classList.remove('finder-open');
+  document.dispatchEvent(new CustomEvent('axion:finder', { detail: { open: false } }));
+});
+finder.addEventListener('cancel', (e) => {
+  e.preventDefault();
+  closeFinder();
+});
+// A click on the dimmed area around the panel closes it.
+finder.addEventListener('click', (e) => {
+  if (e.target === finder) closeFinder();
+});
+
+document.addEventListener('click', (e) => {
+  if (e.target.closest('[data-finder-open]')) openFinder();
+});
+finder.querySelector('[data-finder-close]').addEventListener('click', closeFinder);
+finder.querySelector('[data-finder-back]').addEventListener('click', () => showStep(step - 1));
+finder.querySelector('[data-finder-restart]').addEventListener('click', () => {
+  finderForm.reset();
+  showStep(1);
+});
+nextBtn.addEventListener('click', () => { if (stepReady()) showStep(step + 1); });
+
+finderForm.addEventListener('change', (e) => {
+  // A goal pre-selects the services that usually go with it.
+  if (e.target.name === 'goal') {
+    const preset = GOAL_SERVICES[e.target.value];
+    finderForm.querySelectorAll('[name="services"]').forEach((input) => { input.checked = preset.includes(input.value); });
+  }
+  if (e.target.closest('.finder__picks')) updateAddLabel();
+  nextBtn.disabled = !stepReady();
+});
+// Tapping an answer moves on by itself; keyboard users keep control and press Next.
+finderForm.addEventListener('pointerup', (e) => {
+  const input = e.target.closest('label')?.querySelector('input[type="radio"]');
+  if (!input) return;
+  setTimeout(() => { if (input.checked && stepReady() && step < 4) showStep(step + 1); }, 380);
+});
+
+finder.querySelector('[data-finder-add]').addEventListener('click', () => {
+  chosenPicks().forEach((id) => setInList(id, true));
+  closeFinder();
+});
+finder.querySelector('[data-finder-send]').addEventListener('click', () => {
+  const chosen = chosenPicks();
+  chosen.forEach((id) => setInList(id, true));
+  const context = [checkedLabel('goal'), checkedLabel('load')].filter(Boolean).join(', ');
+  // The page behind a modal dialog is inert, so move on once it has closed.
+  finder.addEventListener('close', () => goToQuote(`${chosen.map(itemName).join(', ')} (${context})`), { once: true });
+  closeFinder();
+});
+
+/* ------------------------------------------------------------------ */
+/* Nudge toward the finder, once per visit                             */
+/* ------------------------------------------------------------------ */
+
+const nudge = document.querySelector('.nudge');
+let nudgeSeen = false;
+try { nudgeSeen = sessionStorage.getItem(FINDER_KEY) === '1'; } catch (e) { /* storage unavailable */ }
+
+function hideNudge(remember) {
+  nudge.hidden = true;
+  if (!remember) return;
+  nudgeSeen = true;
+  try { sessionStorage.setItem(FINDER_KEY, '1'); } catch (e) { /* storage unavailable */ }
+}
+
+nudge.querySelector('.nudge__close').addEventListener('click', () => hideNudge(true));
+
+// Offer it when the visitor reaches the featured products with nothing on their list yet.
+if ('IntersectionObserver' in window) {
+  const watch = new IntersectionObserver((entries) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    watch.disconnect();
+    setTimeout(() => {
+      if (nudgeSeen || list.length || finder.open || document.documentElement.classList.contains('menu-open')) return;
+      nudge.hidden = false;
+    }, 700);
+  }, { threshold: 0.25 });
+  watch.observe(document.getElementById('solutions'));
+}
+// Hide it again once the visitor reaches the quote form.
+if ('IntersectionObserver' in window) {
+  new IntersectionObserver((entries) => {
+    if (entries.some((entry) => entry.isIntersecting)) hideNudge(false);
+  }).observe(document.getElementById('inquiry'));
+}
+
+// Text built by the script follows the language switch.
+document.addEventListener('axion:lang', () => {
+  renderList();
+  if (step === 4) renderPicks();
+  finder.querySelector('.finder__next-label').textContent = t(step === 3 ? 'finder.see' : 'finder.next');
+});
+
+renderList();

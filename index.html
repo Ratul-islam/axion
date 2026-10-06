@@ -8,10 +8,40 @@
   <link rel="icon" href="assets/WhatsApp%20Image%202026-10-01%20at%2012.58.55%20PM.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Jost:ital,wght@0,300..700;1,300..700&family=Tiro+Bangla&family=Anek+Bangla:wght@300..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    // Show the preloader only when scripts run and the visitor hasn't asked for reduced motion.
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('is-loading');
+  </script>
 </head>
 <body>
+
+<!-- Preloader (driven by motion.js; hidden without JS or with reduced motion) -->
+<div class="preloader" aria-hidden="true">
+  <div class="preloader__curtain"></div>
+  <div class="preloader__panel">
+    <div class="preloader__center">
+      <svg class="preloader__mark" viewBox="0 0 120 120">
+        <defs>
+          <linearGradient id="pl-left" x1="0" y1="1" x2="0.4" y2="0"><stop offset="0" stop-color="#7a2244"/><stop offset="1" stop-color="#e0262b"/></linearGradient>
+          <linearGradient id="pl-right" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#f26a24"/><stop offset="1" stop-color="#c2185b"/></linearGradient>
+          <linearGradient id="pl-swoosh" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#c2185b"/><stop offset="0.55" stop-color="#e8432a"/><stop offset="1" stop-color="#f7941d"/></linearGradient>
+        </defs>
+        <path class="preloader__leg" pathLength="1" d="M18 110 L57 12" stroke="url(#pl-left)" stroke-width="19"/>
+        <path class="preloader__leg" pathLength="1" d="M57 12 L96 110" stroke="url(#pl-right)" stroke-width="19"/>
+        <path class="preloader__swoosh" pathLength="1" d="M10 88 C 42 104, 86 84, 110 26" stroke="url(#pl-swoosh)" stroke-width="9" stroke-linecap="round"/>
+      </svg>
+      <p class="preloader__word"><span>A</span><span>x</span><span>i</span><span>o</span><span>n</span></p>
+      <p class="preloader__sub">Bangladesh</p>
+    </div>
+    <div class="preloader__foot">
+      <p class="preloader__status"><span>Warming the steamers</span></p>
+      <p class="preloader__count"><span class="preloader__num">0</span><small>%</small></p>
+    </div>
+    <div class="preloader__bar"><span></span></div>
+  </div>
+</div>
 
 <!-- Icon sprite (Lucide-style, 24×24, stroke-based) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -29,6 +59,14 @@
     <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="11" r="3"/><path d="M8 17c.8-1.2 2.3-2 4-2s3.2.8 4 2"/></symbol>
     <symbol id="i-list-plus" viewBox="0 0 24 24"><path d="M16 6H3"/><path d="M11 12H3"/><path d="M16 18H3"/><path d="M18 9v6"/><path d="M21 12h-6"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+    <symbol id="i-chevron-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
+    <symbol id="i-rotate-ccw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+    <symbol id="i-house" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></symbol>
+    <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></symbol>
     <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-clipboard" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></symbol>
     <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M21 4h-7"/><path d="M10 4H3"/><path d="M21 12h-9"/><path d="M8 12H3"/><path d="M21 20h-5"/><path d="M12 20H3"/><path d="M14 2v4"/><path d="M8 10v4"/><path d="M16 18v4"/></symbol>
@@ -42,8 +80,6 @@
     <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
     <symbol id="i-instagram" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></symbol>
     <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
-    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></symbol>
-    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
   </defs>
 </svg>
 
@@ -82,24 +118,66 @@
       <a href="#inquiry" class="btn btn--primary"><span data-i18n="cta.quote">Request a quote</span><svg class="icon"><use href="#i-arrow-up-right"/></svg></a>
     </div>
     <button class="header__toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-      <svg class="icon icon--open"><use href="#i-menu"/></svg>
-      <svg class="icon icon--close"><use href="#i-x"/></svg>
+      <span class="header__toggle-lines" aria-hidden="true"><span></span><span></span></span>
     </button>
   </div>
-  <div class="mobile-menu" id="mobile-menu" hidden>
-    <ul>
-      <li><a href="#equipment" data-i18n="nav.equipment">Equipment</a></li>
-      <li><a href="#solutions" data-i18n="nav.solutions">Solutions</a></li>
-      <li><a href="#wholesale" data-i18n="nav.wholesale">Wholesale</a></li>
-      <li><a href="#about" data-i18n="nav.about">About</a></li>
-      <li><a href="#inquiry" data-i18n="nav.contact">Contact</a></li>
-    </ul>
+</header>
+
+<!-- Mobile menu: full-screen panel (sits outside the header so the sticky header's transform can't trap it) -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="mobile-menu__layers" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="mobile-menu__inner" data-lenis-prevent>
+    <svg class="mobile-menu__swoosh" viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="mm-swoosh" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#c2185b"/><stop offset="0.55" stop-color="#e8432a"/><stop offset="1" stop-color="#f7941d"/></linearGradient>
+      </defs>
+      <path pathLength="1" d="M-30 800 C 120 880, 330 650, 430 120" stroke="url(#mm-swoosh)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    </svg>
+    <div class="mobile-menu__top">
+      <a href="#top" class="mobile-menu__brand" aria-label="Axion Bangladesh home">
+        <svg class="mobile-menu__mark" viewBox="0 0 120 120" aria-hidden="true">
+          <defs>
+            <linearGradient id="mm-left" x1="0" y1="1" x2="0.4" y2="0"><stop offset="0" stop-color="#7a2244"/><stop offset="1" stop-color="#e0262b"/></linearGradient>
+            <linearGradient id="mm-right" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#f26a24"/><stop offset="1" stop-color="#c2185b"/></linearGradient>
+          </defs>
+          <path d="M18 110 L57 12" stroke="url(#mm-left)" stroke-width="19" fill="none"/>
+          <path d="M57 12 L96 110" stroke="url(#mm-right)" stroke-width="19" fill="none"/>
+          <path d="M10 88 C 42 104, 86 84, 110 26" stroke="url(#mm-swoosh)" stroke-width="9" stroke-linecap="round" fill="none"/>
+        </svg>
+        <span>Axion</span>
+      </a>
+      <button class="mobile-menu__close" type="button" aria-label="Close menu"><span></span><span></span></button>
+    </div>
+    <nav class="mobile-menu__nav" aria-label="Mobile">
+      <ul>
+        <li><a href="#equipment"><span class="mobile-menu__text" data-i18n="nav.equipment">Equipment</span><svg class="icon"><use href="#i-arrow-up-right"/></svg></a></li>
+        <li><a href="#solutions"><span class="mobile-menu__text" data-i18n="nav.solutions">Solutions</span><svg class="icon"><use href="#i-arrow-up-right"/></svg></a></li>
+        <li><a href="#wholesale"><span class="mobile-menu__text" data-i18n="nav.wholesale">Wholesale</span><svg class="icon"><use href="#i-arrow-up-right"/></svg></a></li>
+        <li><a href="#about"><span class="mobile-menu__text" data-i18n="nav.about">About</span><svg class="icon"><use href="#i-arrow-up-right"/></svg></a></li>
+        <li><a href="#inquiry"><span class="mobile-menu__text" data-i18n="nav.contact">Contact</span><svg class="icon"><use href="#i-arrow-up-right"/></svg></a></li>
+      </ul>
+    </nav>
     <div class="mobile-menu__actions">
-      <a href="#equipment" class="btn btn--outline" data-i18n="cta.browse">Browse equipment</a>
+      <a href="#equipment" class="btn btn--light" data-i18n="cta.browse">Browse equipment</a>
       <a href="#inquiry" class="btn btn--primary"><span data-i18n="cta.quote">Request a quote</span><svg class="icon"><use href="#i-arrow-up-right"/></svg></a>
     </div>
+    <div class="mobile-menu__foot">
+      <p class="mobile-menu__tagline" data-i18n="ft.tagline">Professional equipment for the business of beauty.</p>
+      <div class="mobile-menu__meta">
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" class="lang__btn" data-lang="en" aria-pressed="true">EN</button>
+          <span class="lang__sep" aria-hidden="true">·</span>
+          <button type="button" class="lang__btn" data-lang="bn" aria-pressed="false" lang="bn">বাংলা</button>
+        </div>
+        <div class="socials">
+          <a href="#" aria-label="Facebook"><svg class="icon"><use href="#i-facebook"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg class="icon"><use href="#i-instagram"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg class="icon"><use href="#i-message-circle"/></svg></a>
+        </div>
+      </div>
+    </div>
   </div>
-</header>
+</div>
 
 <main>
   <!-- Hero -->
@@ -131,6 +209,66 @@
       </div>
     </div>
   </section>
+
+  <!-- Crossed ribbons (decorative marquee; repeats the category names) -->
+  <div class="ribbons" aria-hidden="true">
+    <div class="ribbon ribbon--back">
+      <div class="ribbon__track">
+        <ul class="ribbon__set">
+          <li data-i18n="hero.badge">Wholesale supply</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="values.3t">Equipment guidance</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="hero.point1">Specification-led selection</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="values.4t">Bangladesh focused</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="values.2t">Wholesale-ready supply</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+        </ul>
+        <ul class="ribbon__set">
+          <li data-i18n="hero.badge">Wholesale supply</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="values.3t">Equipment guidance</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="hero.point1">Specification-led selection</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="values.4t">Bangladesh focused</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="values.2t">Wholesale-ready supply</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ribbon ribbon--front">
+      <div class="ribbon__track">
+        <ul class="ribbon__set">
+          <li data-i18n="cat.1t">HydraFacial systems</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="cat.2t">Facial steamers</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="cat.3t">Hair dryers</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="cat.4t">Hair straighteners</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="cat.5t">Salon machinery</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+        </ul>
+        <ul class="ribbon__set">
+          <li data-i18n="cat.1t">HydraFacial systems</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="cat.2t">Facial steamers</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="cat.3t">Hair dryers</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="cat.4t">Hair straighteners</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+          <li data-i18n="cat.5t">Salon machinery</li>
+          <li class="ribbon__star"><svg class="icon"><use href="#i-sparkles"/></svg></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
   <!-- Value strip -->
   <section class="values" aria-label="Why Axion">
@@ -167,56 +305,61 @@
       </div>
 
       <div class="cat-grid">
-        <a href="#inquiry" class="cat-card cat-card--feature">
+        <article class="cat-card cat-card--feature">
           <div class="cat-card__media">
             <img src="assets/categories/Product%20image.png" alt="HydraFacial system in a styled treatment room" width="506" height="408" loading="lazy">
             <span class="pill pill--light" data-i18n="cat.1tag">Facial technology</span>
+            <button type="button" class="add-btn" data-add="hydrafacial" aria-pressed="false"><svg class="icon add-btn__plus"><use href="#i-plus"/></svg><svg class="icon add-btn__check"><use href="#i-check"/></svg><span class="add-btn__off" data-i18n="list.add">Add to list</span><span class="add-btn__on" data-i18n="list.added">Added</span></button>
           </div>
           <div class="cat-card__body">
-            <div><h3 data-i18n="cat.1t">HydraFacial systems</h3><p data-i18n="cat.1d">Multi-function cleansing, infusion and hydration systems for advanced facial-service menus.</p></div>
-            <span class="round-arrow"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
+            <div><h3><a href="#inquiry" class="cat-card__link" data-i18n="cat.1t">HydraFacial systems</a></h3><p data-i18n="cat.1d">Multi-function cleansing, infusion and hydration systems for advanced facial-service menus.</p></div>
+            <span class="round-arrow" aria-hidden="true"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
           </div>
-        </a>
-        <a href="#inquiry" class="cat-card">
+        </article>
+        <article class="cat-card">
           <div class="cat-card__media">
             <img src="assets/categories/Product%20image%20(2).png" alt="Facial steamer with magnifying lamp" width="365" height="166" loading="lazy">
             <span class="pill pill--light" data-i18n="cat.2tag">Skin preparation</span>
+            <button type="button" class="add-btn" data-add="steamer" aria-pressed="false"><svg class="icon add-btn__plus"><use href="#i-plus"/></svg><svg class="icon add-btn__check"><use href="#i-check"/></svg><span class="add-btn__off" data-i18n="list.add">Add to list</span><span class="add-btn__on" data-i18n="list.added">Added</span></button>
           </div>
           <div class="cat-card__body">
-            <div><h3 data-i18n="cat.2t">Facial steamers</h3><p data-i18n="cat.2d">Professional steam delivery for cleansing and treatment prep.</p></div>
-            <span class="round-arrow"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
+            <div><h3><a href="#inquiry" class="cat-card__link" data-i18n="cat.2t">Facial steamers</a></h3><p data-i18n="cat.2d">Professional steam delivery for cleansing and treatment prep.</p></div>
+            <span class="round-arrow" aria-hidden="true"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
           </div>
-        </a>
-        <a href="#inquiry" class="cat-card">
+        </article>
+        <article class="cat-card">
           <div class="cat-card__media">
             <img src="assets/categories/Product%20image%20(3).png" alt="Professional hair dryer on a stone block" width="365" height="166" loading="lazy">
             <span class="pill pill--light" data-i18n="cat.3tag">Drying &amp; finish</span>
+            <button type="button" class="add-btn" data-add="dryer" aria-pressed="false"><svg class="icon add-btn__plus"><use href="#i-plus"/></svg><svg class="icon add-btn__check"><use href="#i-check"/></svg><span class="add-btn__off" data-i18n="list.add">Add to list</span><span class="add-btn__on" data-i18n="list.added">Added</span></button>
           </div>
           <div class="cat-card__body">
-            <div><h3 data-i18n="cat.3t">Hair dryers</h3><p data-i18n="cat.3d">Handheld and standing formats for efficient salon workflows.</p></div>
-            <span class="round-arrow"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
+            <div><h3><a href="#inquiry" class="cat-card__link" data-i18n="cat.3t">Hair dryers</a></h3><p data-i18n="cat.3d">Handheld and standing formats for efficient salon workflows.</p></div>
+            <span class="round-arrow" aria-hidden="true"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
           </div>
-        </a>
-        <a href="#inquiry" class="cat-card">
+        </article>
+        <article class="cat-card">
           <div class="cat-card__media">
             <img src="assets/categories/Product%20image%20(1).png" alt="Burgundy professional hair straightener" width="365" height="166" loading="lazy">
             <span class="pill pill--light" data-i18n="cat.4tag">Styling tools</span>
+            <button type="button" class="add-btn" data-add="straightener" aria-pressed="false"><svg class="icon add-btn__plus"><use href="#i-plus"/></svg><svg class="icon add-btn__check"><use href="#i-check"/></svg><span class="add-btn__off" data-i18n="list.add">Add to list</span><span class="add-btn__on" data-i18n="list.added">Added</span></button>
           </div>
           <div class="cat-card__body">
-            <div><h3 data-i18n="cat.4t">Hair straighteners</h3><p data-i18n="cat.4d">Professional plates and precise heat control for consistent styling.</p></div>
-            <span class="round-arrow"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
+            <div><h3><a href="#inquiry" class="cat-card__link" data-i18n="cat.4t">Hair straighteners</a></h3><p data-i18n="cat.4d">Professional plates and precise heat control for consistent styling.</p></div>
+            <span class="round-arrow" aria-hidden="true"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
           </div>
-        </a>
-        <a href="#inquiry" class="cat-card">
+        </article>
+        <article class="cat-card">
           <div class="cat-card__media">
             <img src="assets/categories/Product%20image%20(4).png" alt="Towel warmers and salon trolley" width="365" height="166" loading="lazy">
             <span class="pill pill--light" data-i18n="cat.5tag">Complete setup</span>
+            <button type="button" class="add-btn" data-add="machinery" aria-pressed="false"><svg class="icon add-btn__plus"><use href="#i-plus"/></svg><svg class="icon add-btn__check"><use href="#i-check"/></svg><span class="add-btn__off" data-i18n="list.add">Add to list</span><span class="add-btn__on" data-i18n="list.added">Added</span></button>
           </div>
           <div class="cat-card__body">
-            <div><h3 data-i18n="cat.5t">Salon machinery</h3><p data-i18n="cat.5d">Supporting machinery and accessories for treatment rooms.</p></div>
-            <span class="round-arrow"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
+            <div><h3><a href="#inquiry" class="cat-card__link" data-i18n="cat.5t">Salon machinery</a></h3><p data-i18n="cat.5d">Supporting machinery and accessories for treatment rooms.</p></div>
+            <span class="round-arrow" aria-hidden="true"><svg class="icon"><use href="#i-arrow-up-right"/></svg></span>
           </div>
-        </a>
+        </article>
       </div>
 
       <div class="advisor">
@@ -225,7 +368,10 @@
           <strong data-i18n="advisor.title">Not sure what fits your service menu?</strong>
           <span data-i18n="advisor.text">Share your planned treatments, budget range and expected usage—we’ll help narrow the equipment shortlist.</span>
         </div>
-        <a href="#inquiry" class="advisor__link" data-i18n="advisor.cta">Talk to an equipment advisor →</a>
+        <div class="advisor__actions">
+          <button type="button" class="btn btn--primary" data-finder-open><span data-i18n="advisor.find">Find my setup</span><svg class="icon"><use href="#i-sparkles"/></svg></button>
+          <a href="#inquiry" class="advisor__link" data-i18n="advisor.cta">Talk to an equipment advisor →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -239,7 +385,7 @@
           <h2 class="h2" data-i18n="feat.title">Professional essentials, selected by<br> workflow.</h2>
           <p class="lead" data-i18n="feat.lead">Representative solutions across facial care and hair styling. Ask for current configurations, specifications and wholesale availability.</p>
         </div>
-        <a href="#inquiry" class="btn btn--outline btn--lg"><span data-i18n="feat.cta">Build an equipment list</span><svg class="icon"><use href="#i-list-plus"/></svg></a>
+        <button type="button" class="btn btn--outline btn--lg" data-finder-open><span data-i18n="feat.cta">Build an equipment list</span><svg class="icon"><use href="#i-list-plus"/></svg></button>
       </div>
 
       <div class="feat-grid">
@@ -247,6 +393,7 @@
           <div class="feat-card__media">
             <img src="assets/featured/Product%20image.png" alt="Multi-function facial platform on wheeled base" width="412" height="284" loading="lazy">
             <span class="pill pill--dark" data-i18n="feat.1tag">Facial studio</span>
+            <button type="button" class="add-btn" data-add="facial-platform" aria-pressed="false"><svg class="icon add-btn__plus"><use href="#i-plus"/></svg><svg class="icon add-btn__check"><use href="#i-check"/></svg><span class="add-btn__off" data-i18n="list.add">Add to list</span><span class="add-btn__on" data-i18n="list.added">Added</span></button>
           </div>
           <div class="feat-card__body">
             <h3 data-i18n="feat.1t">Multi-function facial platform</h3>
@@ -266,6 +413,7 @@
           <div class="feat-card__media">
             <img src="assets/featured/Product%20image%20(1).png" alt="Facial steamer and magnifying lamp set" width="412" height="284" loading="lazy">
             <span class="pill pill--dark" data-i18n="feat.2tag">Treatment room</span>
+            <button type="button" class="add-btn" data-add="steamer-lamp" aria-pressed="false"><svg class="icon add-btn__plus"><use href="#i-plus"/></svg><svg class="icon add-btn__check"><use href="#i-check"/></svg><span class="add-btn__off" data-i18n="list.add">Add to list</span><span class="add-btn__on" data-i18n="list.added">Added</span></button>
           </div>
           <div class="feat-card__body">
             <h3 data-i18n="feat.2t">Steamer &amp; magnifying lamp set</h3>
@@ -285,6 +433,7 @@
           <div class="feat-card__media">
             <img src="assets/featured/Product%20image%20(2).png" alt="Hair dryer and straightener styling kit" width="412" height="284" loading="lazy">
             <span class="pill pill--dark" data-i18n="feat.3tag">Styling station</span>
+            <button type="button" class="add-btn" data-add="styling-kit" aria-pressed="false"><svg class="icon add-btn__plus"><use href="#i-plus"/></svg><svg class="icon add-btn__check"><use href="#i-check"/></svg><span class="add-btn__off" data-i18n="list.add">Add to list</span><span class="add-btn__on" data-i18n="list.added">Added</span></button>
           </div>
           <div class="feat-card__body">
             <h3 data-i18n="feat.3t">Professional heat styling kit</h3>
@@ -561,8 +710,103 @@
       <a href="#top" class="footer__top"><span data-i18n="ft.top">Back to top</span><svg class="icon"><use href="#i-arrow-up"/></svg></a>
     </div>
   </div>
+  <p class="footer__mark" aria-hidden="true"><span>A</span><span>x</span><span>i</span><span>o</span><span>n</span></p>
 </footer>
 
+<!-- Setup finder: three questions that build a starting equipment list -->
+<dialog class="finder" id="finder" aria-labelledby="finder-title">
+  <div class="finder__panel" data-lenis-prevent>
+    <div class="finder__head">
+      <p class="finder__title" id="finder-title" data-i18n="finder.title">Find your setup</p>
+      <p class="finder__count" aria-hidden="true"><span class="finder__num">1</span> / 3</p>
+      <button type="button" class="finder__close" data-finder-close aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="finder__progress" aria-hidden="true"><span></span></div>
+    <form class="finder__form" novalidate>
+      <fieldset class="finder__step" data-step="1">
+        <legend class="finder__q" data-i18n="finder.q1">What are you planning?</legend>
+        <p class="finder__hint" data-i18n="finder.intro">Three quick questions. You’ll get a starting equipment list to send to our team.</p>
+        <div class="finder__options finder__options--goals">
+            <label class="opt"><input type="radio" name="goal" value="new"><span class="opt__icon"><svg class="icon"><use href="#i-house"/></svg></span><span class="opt__label" data-i18n="finder.g1">Opening a new salon</span></label>
+            <label class="opt"><input type="radio" name="goal" value="facial"><span class="opt__icon"><svg class="icon"><use href="#i-droplet"/></svg></span><span class="opt__label" data-i18n="finder.g2">Adding facial treatments</span></label>
+            <label class="opt"><input type="radio" name="goal" value="hair"><span class="opt__icon"><svg class="icon"><use href="#i-scissors"/></svg></span><span class="opt__label" data-i18n="finder.g3">Upgrading hair stations</span></label>
+            <label class="opt"><input type="radio" name="goal" value="resell"><span class="opt__icon"><svg class="icon"><use href="#i-package"/></svg></span><span class="opt__label" data-i18n="finder.g4">Buying stock to resell</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="finder__step" data-step="2" hidden>
+        <legend class="finder__q" data-i18n="finder.q2">Which services will you offer?</legend>
+        <p class="finder__hint" data-i18n="finder.q2hint">Choose all that apply.</p>
+        <div class="finder__options finder__options--services">
+            <label class="opt opt--media"><input type="checkbox" name="services" value="facials"><img src="assets/categories/Product%20image.png" alt="" width="365" height="166" loading="lazy"><span class="opt__label" data-i18n="finder.s1">Advanced facials</span><span class="opt__tick"><svg class="icon"><use href="#i-check"/></svg></span></label>
+            <label class="opt opt--media"><input type="checkbox" name="services" value="skin"><img src="assets/categories/Product%20image%20(2).png" alt="" width="365" height="166" loading="lazy"><span class="opt__label" data-i18n="finder.s2">Skin prep and steaming</span><span class="opt__tick"><svg class="icon"><use href="#i-check"/></svg></span></label>
+            <label class="opt opt--media"><input type="checkbox" name="services" value="drying"><img src="assets/categories/Product%20image%20(3).png" alt="" width="365" height="166" loading="lazy"><span class="opt__label" data-i18n="finder.s3">Blow-dry and finishing</span><span class="opt__tick"><svg class="icon"><use href="#i-check"/></svg></span></label>
+            <label class="opt opt--media"><input type="checkbox" name="services" value="styling"><img src="assets/categories/Product%20image%20(1).png" alt="" width="365" height="166" loading="lazy"><span class="opt__label" data-i18n="finder.s4">Straightening and styling</span><span class="opt__tick"><svg class="icon"><use href="#i-check"/></svg></span></label>
+            <label class="opt opt--media"><input type="checkbox" name="services" value="room"><img src="assets/categories/Product%20image%20(4).png" alt="" width="365" height="166" loading="lazy"><span class="opt__label" data-i18n="finder.s5">Treatment room essentials</span><span class="opt__tick"><svg class="icon"><use href="#i-check"/></svg></span></label>
+        </div>
+      </fieldset>
+      <fieldset class="finder__step" data-step="3" hidden>
+        <legend class="finder__q" data-i18n="finder.q3">How busy will it be?</legend>
+        <p class="finder__hint" data-i18n="finder.q3hint">This helps our team suggest the right formats and quantities.</p>
+        <div class="finder__options finder__options--load">
+            <label class="opt opt--row"><input type="radio" name="load" value="1"><span class="opt__bars" data-level="1"><i></i><i></i><i></i></span><span class="opt__text"><span class="opt__label" data-i18n="finder.w1">Just getting started</span><span class="opt__desc" data-i18n="finder.w1d">A few clients a day</span></span></label>
+            <label class="opt opt--row"><input type="radio" name="load" value="2"><span class="opt__bars" data-level="2"><i></i><i></i><i></i></span><span class="opt__text"><span class="opt__label" data-i18n="finder.w2">Steady bookings</span><span class="opt__desc" data-i18n="finder.w2d">Most of the day is booked</span></span></label>
+            <label class="opt opt--row"><input type="radio" name="load" value="3"><span class="opt__bars" data-level="3"><i></i><i></i><i></i></span><span class="opt__text"><span class="opt__label" data-i18n="finder.w3">Busy, several stations</span><span class="opt__desc" data-i18n="finder.w3d">Clients in parallel, all day</span></span></label>
+        </div>
+      </fieldset>
+      <div class="finder__step finder__result" data-step="4" hidden>
+        <h2 class="finder__q" data-i18n="finder.result">Your starting list</h2>
+        <p class="finder__summary"></p>
+        <ul class="finder__picks"></ul>
+        <p class="finder__note" data-i18n="finder.resultNote">Our team will confirm configurations, quantities and availability.</p>
+      </div>
+      <div class="finder__foot">
+        <button type="button" class="finder__ghost" data-finder-back><svg class="icon"><use href="#i-arrow-left"/></svg><span data-i18n="finder.back">Back</span></button>
+        <button type="button" class="finder__ghost" data-finder-restart hidden><svg class="icon"><use href="#i-rotate-ccw"/></svg><span data-i18n="finder.restart">Start over</span></button>
+        <div class="finder__foot-end">
+          <button type="button" class="btn btn--primary" data-finder-next disabled><span class="finder__next-label" data-i18n="finder.next">Next</span><svg class="icon"><use href="#i-arrow-right"/></svg></button>
+          <button type="button" class="btn btn--outline" data-finder-add hidden><span class="finder__add-label">Add to my list</span></button>
+          <button type="button" class="btn btn--primary" data-finder-send hidden><span data-i18n="cta.quote">Request a quote</span><svg class="icon"><use href="#i-arrow-right"/></svg></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- Equipment list: what visitors collect while browsing (remembered on this device) -->
+<div class="shortlist" hidden>
+  <div class="shortlist__panel" id="shortlist-panel" hidden>
+    <div class="shortlist__panel-head">
+      <p class="shortlist__title" data-i18n="list.title">Your equipment list</p>
+      <button type="button" class="shortlist__clear" data-list-clear data-i18n="list.clear">Clear list</button>
+    </div>
+    <ul class="shortlist__items"></ul>
+    <button type="button" class="btn btn--primary shortlist__send" data-list-send><span data-i18n="list.send">Request a quote for these</span><svg class="icon"><use href="#i-arrow-right"/></svg></button>
+  </div>
+  <button type="button" class="shortlist__dock" aria-expanded="false" aria-controls="shortlist-panel">
+    <span class="shortlist__thumbs" aria-hidden="true"></span>
+    <span class="shortlist__label" data-i18n="list.title">Your equipment list</span>
+    <span class="shortlist__count">0</span>
+    <svg class="icon shortlist__chev"><use href="#i-chevron-up"/></svg>
+  </button>
+</div>
+<p class="visually-hidden" aria-live="polite" data-list-status></p>
+
+<!-- One-time prompt toward the setup finder -->
+<aside class="nudge" aria-label="Setup finder" hidden>
+  <span class="nudge__icon"><svg class="icon"><use href="#i-sparkles"/></svg></span>
+  <p class="nudge__text" data-i18n="nudge.text">Planning a salon? Answer three questions and get a starting equipment list.</p>
+  <div class="nudge__actions">
+    <button type="button" class="btn btn--primary" data-finder-open><span data-i18n="advisor.find">Find my setup</span></button>
+    <button type="button" class="nudge__close" aria-label="Dismiss"><svg class="icon"><use href="#i-x"/></svg></button>
+  </div>
+</aside>
+
+<!-- Motion libraries (pinned versions). The site works without them; motion.js checks they loaded. -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
 <script src="script.js"></script>
+<script src="motion.js"></script>
 </body>
 </html>
