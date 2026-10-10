@@ -193,8 +193,64 @@
 </div>
 
 <main>
+  <!-- The Axion Line: a scroll-driven ride through the range that ends at the logo (ride.js).
+       Hidden without motion; ride.js removes it if WebGL is unavailable. -->
+  <section class="ride" aria-labelledby="ride-title">
+    <div class="ride__stage">
+      <canvas class="ride__canvas" aria-hidden="true"></canvas>
+      <canvas class="ride__fog" aria-hidden="true"></canvas>
+      <div class="ride__intro">
+        <p class="ride__title" id="ride-title" data-i18n="ride.title">The mirror's still<br> steamed up.</p>
+        <p class="ride__hint" data-i18n="ride.hint">Wipe the glass, or scroll to start the ride.</p>
+      </div>
+      <p class="ride__go" aria-hidden="true" data-i18n="ride.go">Hold on tight.</p>
+      <ol class="ride__stops">
+        <li class="ride__stop" data-side="left">
+          <span class="ride__num" aria-hidden="true">01</span>
+          <span class="ride__tag" data-i18n="cat.1tag">Facial technology</span>
+          <strong class="ride__name" data-i18n="cat.1t">HydraFacial systems</strong>
+          <span class="ride__desc" data-i18n="cat.1d">Multi-function cleansing, infusion and hydration systems for advanced facial-service menus.</span>
+        </li>
+        <li class="ride__stop" data-side="right">
+          <span class="ride__num" aria-hidden="true">02</span>
+          <span class="ride__tag" data-i18n="cat.2tag">Skin preparation</span>
+          <strong class="ride__name" data-i18n="cat.2t">Facial steamers</strong>
+          <span class="ride__desc" data-i18n="cat.2d">Professional steam delivery for cleansing and treatment prep.</span>
+        </li>
+        <li class="ride__stop" data-side="left">
+          <span class="ride__num" aria-hidden="true">03</span>
+          <span class="ride__tag" data-i18n="cat.3tag">Drying &amp; finish</span>
+          <strong class="ride__name" data-i18n="cat.3t">Hair dryers</strong>
+          <span class="ride__desc" data-i18n="cat.3d">Handheld and standing formats for efficient salon workflows.</span>
+        </li>
+        <li class="ride__stop" data-side="right">
+          <span class="ride__num" aria-hidden="true">04</span>
+          <span class="ride__tag" data-i18n="cat.4tag">Styling tools</span>
+          <strong class="ride__name" data-i18n="cat.4t">Hair straighteners</strong>
+          <span class="ride__desc" data-i18n="cat.4d">Professional plates and precise heat control for consistent styling.</span>
+        </li>
+        <li class="ride__stop" data-side="left">
+          <span class="ride__num" aria-hidden="true">05</span>
+          <span class="ride__tag" data-i18n="cat.5tag">Complete setup</span>
+          <strong class="ride__name" data-i18n="cat.5t">Salon machinery</strong>
+          <span class="ride__desc" data-i18n="cat.5d">Supporting machinery and accessories for treatment rooms.</span>
+        </li>
+      </ol>
+      <div class="ride__end">
+        <p class="ride__end-title" data-i18n="ride.endTitle">Welcome to Axion.</p>
+        <p class="ride__end-text" data-i18n="ride.endText">You've seen the line-up. Now let's plan the setup that fits your salon.</p>
+        <a class="btn btn--primary btn--lg" href="#hero"><span data-i18n="ride.endCta">Start planning</span><svg class="icon"><use href="#i-arrow-right"/></svg></a>
+      </div>
+      <div class="ride__hud">
+        <ol class="ride__line" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li></ol>
+        <a class="ride__skip" href="#hero"><span data-i18n="ride.skip">Skip the ride</span><svg class="icon"><use href="#i-arrow-right"/></svg></a>
+      </div>
+    </div>
+  </section>
+  <script type="module" src="./ride.js" onerror="document.querySelector('.ride')?.remove(); window.ScrollTrigger?.refresh(); document.dispatchEvent(new CustomEvent('axion:rideready'));"></script>
+
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero" id="hero">
     <div class="container hero__inner">
       <div class="hero__content">
         <p class="hero__eyebrow" data-i18n="hero.eyebrow">Salon equipment for Bangladesh</p>

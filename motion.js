@@ -865,6 +865,12 @@
   const heroImg = $('.hero__media img');
   if (heroImg) gsap.set(heroImg, { scale: 1.12 });
 
+  // The Axion Line (ride.js) opens the home page. Coming back to it later in the same visit,
+  // after riding it once, the page opens at the hero instead; the ride is still above.
+  const ride = $('.ride');
+  let skipRide = false;
+  try { skipRide = Boolean(ride && returning && sessionStorage.getItem('axion-ride')); } catch (e) { /* storage unavailable */ }
+
   function playIntro() {
     const tl = gsap.timeline({ defaults: { ease: 'expo.out', duration: 1.2 } });
 
@@ -877,7 +883,12 @@
     }
 
     if (heroImg) {
-      tl.fromTo('.hero__media', { clipPath: 'circle(0% at 50% 60%)' }, {
+      // On the home page the ride comes first, so the hero plays as it arrives instead of unseen.
+      const heroTl = ride && !skipRide ? gsap.timeline({ paused: true, defaults: tl.vars.defaults }) : tl;
+      if (heroTl !== tl) {
+        ScrollTrigger.create({ trigger: '.hero', start: 'top 70%', once: true, onEnter: () => heroTl.play() });
+      }
+      heroTl.fromTo('.hero__media', { clipPath: 'circle(0% at 50% 60%)' }, {
         clipPath: 'circle(80% at 50% 60%)', duration: 1.8, ease: 'expo.inOut', clearProps: 'clipPath',
       }, 0)
         .fromTo(heroImg, { scale: 1.5 }, { scale: 1.12, duration: 2.4 }, 0.35)
@@ -890,7 +901,7 @@
         }, 1.25)
         .fromTo('.hero__card', { y: 40, opacity: 0 }, { y: 0, opacity: 1, ease: 'back.out(1.7)', duration: 1 }, 1.35);
 
-      tl.then(() => {
+      heroTl.then(() => {
         if (finePointer) initHeroParallax();
         // Hero content drifts up and fades as the page scrolls past it.
         const pastHero = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
@@ -922,6 +933,7 @@
 
   function assetsReady() {
     const waits = [document.fonts?.ready, heroImg?.decode?.().catch(() => {})];
+    if (ride) waits.push(new Promise((resolve) => { document.addEventListener('axion:rideready', resolve, { once: true }); }));
     return Promise.race([Promise.all(waits), wait(3500)]);
   }
 
@@ -933,6 +945,9 @@
     playIntro();
     ScrollTrigger.refresh();
     if (location.hash) scrollToTarget(location.hash, true);
+    else if (skipRide) scrollToTarget('#hero', true);
+    root.classList.add('is-revealed');
+    document.dispatchEvent(new CustomEvent('axion:revealed'));
   }
 
   // The panels lift with a curved edge: the night panel first, then the maroon curtain beneath it.
