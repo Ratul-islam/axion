@@ -5,6 +5,9 @@
 // will then open with the subject and body filled in and the "To" field blank.
 const INQUIRY_EMAIL = '';
 
+// Relative path from this page back to the site root ("./" or "../"), set on <html> by build.py.
+const ROOT = document.documentElement.dataset.root || './';
+
 /* ------------------------------------------------------------------ */
 /* Translations (English is read from the HTML itself)                 */
 /* ------------------------------------------------------------------ */
@@ -21,7 +24,7 @@ const BN = {
   'cta.browse': 'সরঞ্জাম দেখুন',
   'cta.quote': 'কোটেশন চান',
 
-  'hero.eyebrow': 'সেলুন সরঞ্জাম · বাংলাদেশ',
+  'hero.eyebrow': 'বাংলাদেশের জন্য সেলুন সরঞ্জাম',
   'hero.title': 'উন্নত সেবার জন্য<br> বিউটি ব্যবসাকে<br> সজ্জিত করুন।',
   'hero.text': 'অ্যাক্সিয়ন বাংলাদেশ পেশাদার ফেসিয়াল, হেয়ার ও সেলুন মেশিনারি আমদানি ও সরবরাহ করে—বিবেচিত পণ্য নির্বাচন, স্পষ্ট সরঞ্জাম নির্দেশনা এবং পাইকারি অর্ডার সহায়তাসহ।',
   'hero.explore': 'সরঞ্জাম দেখুন',
@@ -229,10 +232,104 @@ const BN = {
   'finder.restart': 'আবার শুরু করুন',
 
   'nudge.text': 'সেলুনের পরিকল্পনা করছেন? তিনটি প্রশ্নের উত্তর দিন, পেয়ে যান একটি প্রাথমিক সরঞ্জাম তালিকা।',
+
+  'crumb.home': 'হোম',
+  'next.label': 'এরপর',
+  'explore.eyebrow': 'অ্যাক্সিয়ন ঘুরে দেখুন',
+  'explore.title': 'পরবর্তী স্টেশনের পরিকল্পনায়<br> যা কিছু দরকার।',
+  'explore.lead': 'সরঞ্জাম দিয়ে শুরু করুন, সেটআপগুলো কীভাবে সাজানো হয় দেখুন, অথবা পাইকারি অর্ডার কীভাবে কাজ করে জেনে নিন।',
+  'explore.1d': 'ফেসিয়াল সিস্টেম, স্টিমার, হেয়ার টুলস ও সেলুন মেশিনারি।',
+  'explore.2d': 'ফেসিয়াল স্টুডিও, ট্রিটমেন্ট রুম ও স্টাইলিং স্টেশনের সেটআপ।',
+  'explore.3d': 'চাহিদা থেকে সরবরাহ পর্যন্ত চারটি স্পষ্ট ধাপ।',
+  'explore.4d': 'সরঞ্জামের পেছনের মানুষ ও ভাবনা।',
+  'cta.title': 'কোথা থেকে শুরু করবেন বুঝতে পারছেন না?',
+  'cta.text': 'প্রাথমিক সরঞ্জাম তালিকার জন্য তিনটি প্রশ্নের উত্তর দিন, অথবা আপনার চাহিদা সরাসরি আমাদের টিমকে পাঠান।',
+  'co.team': 'টিমের সাথে পরিচিত হোন',
+  'legal.privacyLead': 'এই পেজটি গোপনীয়তা নীতির জন্য প্রস্তুত। চালুর আগে নিশ্চিত নীতিমালা যোগ করুন।',
+  'cta.help': 'বেছে নিতে সাহায্য করুন',
+  'hero.browseAll': 'অথবা সব সরঞ্জাম দেখুন',
+  'show.title': 'শোরুমে ঘুরে দেখুন।',
+  'show.lead': 'ফেসিয়াল সিস্টেম, স্টিমার ও স্টাইলিং টুলস—একটির পর একটি। যেকোনোটি খুলে বিস্তারিত দেখুন, অথবা দেখতে দেখতেই তালিকায় যোগ করুন।',
+  'show.open': 'বিস্তারিত দেখুন',
+  'qv.goodFor': 'যেসব সেবার জন্য',
+  'qv.pairs': 'যার সাথে ভালো মানায়',
+  'qv.ask': 'এটি সম্পর্কে জানতে চান',
+  'brief.jump': 'আপনার ব্রিফ তৈরি করুন',
+  'buyer.ready': 'যা হাতে রাখলে ভালো',
+  'buyer.newText': 'যে ট্রিটমেন্টগুলো দিতে চান সেখান থেকে শুরু করুন। আমরা একেকটি স্টেশন ধরে তালিকা সাজাই, যাতে প্রথম অর্ডারে রুমের যা দরকার ঠিক সেটুকুই থাকে।',
+  'buyer.new1': 'যে ট্রিটমেন্টগুলো দিতে চান',
+  'buyer.new2': 'রুমের মাপ ও কয়টি স্টেশন',
+  'buyer.new3': 'পুরো সেটআপের বাজেট',
+  'buyer.refreshText': 'এখন কী ব্যবহার করছেন এবং কোথায় টিমের সময় নষ্ট হয় জানান। আপনার সেলুনের চলমান পদ্ধতির সাথে নতুন কনফিগারেশন মিলিয়ে দেখি।',
+  'buyer.refresh1': 'যে সরঞ্জাম বদলাতে চান',
+  'buyer.refresh2': 'দিনে কতজন ক্লায়েন্ট সেবা পান',
+  'buyer.refresh3': 'জায়গা বা বৈদ্যুতিক কোনো সীমাবদ্ধতা',
+  'buyer.resellText': 'কোন ক্যাটাগরি ও কত পরিমাণ রাখতে চান জানান। সরবরাহ সমন্বয়ের আগে আমরা কনফিগারেশন ও বাণিজ্যিক শর্ত নিশ্চিত করি।',
+  'buyer.resell1': 'ক্যাটাগরি ও পরিমাণ',
+  'buyer.resell2': 'যে শহরে ডেলিভারি দরকার',
+  'buyer.resell3': 'কবে স্টক দরকার',
+  'journey.title': 'চারটি ধাপ, কোনো অনুমান নয়।',
+  'journey.lead': 'পরের ধাপে কী হবে এবং আপনার কাছ থেকে কী লাগবে—সবসময় জানবেন।',
+  'brief.title': 'এক মিনিটে আপনার ব্রিফ তৈরি করুন।',
+  'brief.lead': 'যা প্রযোজ্য বেছে নিন। আমরা সেটিকে একটি বার্তায় সাজিয়ে দেব, যা সরাসরি আমাদের টিমকে পাঠাতে পারবেন।',
+  'brief.q1': 'অর্ডারের ধরন',
+  'brief.q2': 'সরঞ্জাম',
+  'brief.q3': 'পরিমাণ',
+  'brief.q4': 'সময়',
+  'brief.q5': 'ডেলিভারির শহর',
+  'brief.cityPh': 'যেমন: ঢাকা, চট্টগ্রাম',
+  'brief.qty1': '১টি',
+  'brief.qty2': '২–৫টি',
+  'brief.qty3': '৬–২০টি',
+  'brief.qty4': '২০টির বেশি',
+  'brief.t1': 'এই মাসে',
+  'brief.t2': '১–৩ মাসের মধ্যে',
+  'brief.t3': 'শুধু খোঁজ নিচ্ছি',
+  'brief.preview': 'আপনার ব্রিফ',
+  'brief.empty': 'কয়েকটি অপশন বেছে নিন, এখানে আপনার ব্রিফ দেখা যাবে।',
+  'brief.send': 'এই ব্রিফ পাঠান',
+  'brief.note': 'এতে কোটেশন ফর্মটি সব তথ্যসহ খুলবে। সেখানে চাইলে পরিবর্তন করতে পারবেন।',
+  'legal.termsLead': 'এই পেজটি ব্যবসায়িক শর্তাবলির জন্য প্রস্তুত। চালুর আগে নিশ্চিত শর্তাবলি যোগ করুন।',
 };
 
 // Strings only used from script; English values live here rather than in the HTML.
+// Names the script shows on any page (equipment list, finder, page transitions), so they
+// don't depend on which page happens to contain them.
 const EN_EXTRA = {
+  'crumb.home': 'Home',
+  'cat.1t': 'HydraFacial systems',
+  'cat.2t': 'Facial steamers',
+  'cat.3t': 'Hair dryers',
+  'cat.4t': 'Hair straighteners',
+  'cat.5t': 'Salon machinery',
+  'feat.1t': 'Multi-function facial platform',
+  'feat.2t': 'Steamer &amp; magnifying lamp set',
+  'feat.3t': 'Professional heat styling kit',
+  'cat.1d': 'Multi-function cleansing, infusion and hydration systems for advanced facial-service menus.',
+  'cat.2d': 'Professional steam delivery for cleansing and treatment prep.',
+  'cat.3d': 'Handheld and standing formats for efficient salon workflows.',
+  'cat.4d': 'Professional plates and precise heat control for consistent styling.',
+  'cat.5d': 'Supporting machinery and accessories for treatment rooms.',
+  'cat.1tag': 'Facial technology',
+  'cat.2tag': 'Skin preparation',
+  'cat.3tag': 'Drying &amp; finish',
+  'cat.4tag': 'Styling tools',
+  'cat.5tag': 'Complete setup',
+  'feat.1d': 'A configurable system for cleansing, hydration and serum-assisted facial services.',
+  'feat.2d': 'A practical pairing for skin analysis, cleansing preparation and close treatment work.',
+  'feat.3d': 'Core drying and straightening tools for reliable day-to-day salon service.',
+  'feat.1tag': 'Facial studio',
+  'feat.2tag': 'Treatment room',
+  'feat.3tag': 'Styling station',
+  'feat.1c1': 'Touchscreen control',
+  'feat.1c2': 'Organized handpieces',
+  'feat.1c3': 'Mobile base',
+  'feat.2c1': 'Adjustable arm',
+  'feat.2c2': 'Stable wheeled base',
+  'feat.2c3': 'Clinic-ready finish',
+  'feat.3c1': 'Salon-duty formats',
+  'feat.3c2': 'Controlled styling',
+  'feat.3c3': 'Ergonomic handling',
   'form.invalid': 'Please fill in all fields.',
   'form.opened': 'Your inquiry has opened in your email app. Press “Send” to submit it.',
   'list.remove': 'Remove from list',
@@ -349,57 +446,88 @@ window.matchMedia('(min-width: 1181px)').addEventListener('change', (e) => {
 /* ------------------------------------------------------------------ */
 
 const form = document.getElementById('quote-form');
-const statusEl = form.querySelector('.quote__status');
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
+if (form) {
+  const statusEl = form.querySelector('.quote__status');
 
-  const fields = [...form.querySelectorAll('input[required]')];
-  let firstInvalid = null;
-  fields.forEach((input) => {
-    const empty = !input.value.trim();
-    input.setAttribute('aria-invalid', String(empty));
-    if (empty && !firstInvalid) firstInvalid = input;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const fields = [...form.querySelectorAll('[required]')];
+    let firstInvalid = null;
+    fields.forEach((input) => {
+      const empty = !input.value.trim();
+      input.setAttribute('aria-invalid', String(empty));
+      if (empty && !firstInvalid) firstInvalid = input;
+    });
+    if (firstInvalid) {
+      statusEl.textContent = t('form.invalid');
+      firstInvalid.focus();
+      return;
+    }
+
+    const data = Object.fromEntries(new FormData(form));
+    const subject = `Wholesale quote request — ${data.business.trim()}`;
+    const body = [
+      `Business name: ${data.business.trim()}`,
+      `Contact person: ${data.contact.trim()}`,
+      `Equipment needed: ${data.equipment.trim()}`,
+      `Preferred contact: ${data.preferred.trim()}`,
+    ].join('\n');
+
+    window.location.href =
+      `mailto:${INQUIRY_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    statusEl.textContent = t('form.opened');
   });
-  if (firstInvalid) {
-    statusEl.textContent = t('form.invalid');
-    firstInvalid.focus();
-    return;
-  }
 
-  const data = Object.fromEntries(new FormData(form));
-  const subject = `Wholesale quote request — ${data.business.trim()}`;
-  const body = [
-    `Business name: ${data.business.trim()}`,
-    `Contact person: ${data.contact.trim()}`,
-    `Equipment needed: ${data.equipment.trim()}`,
-    `Preferred contact: ${data.preferred.trim()}`,
-  ].join('\n');
-
-  window.location.href =
-    `mailto:${INQUIRY_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  statusEl.textContent = t('form.opened');
-});
-
-form.addEventListener('input', (e) => {
-  if (e.target.value.trim()) e.target.removeAttribute('aria-invalid');
-});
+  form.addEventListener('input', (e) => {
+    if (e.target.value.trim()) e.target.removeAttribute('aria-invalid');
+  });
+}
 
 /* ------------------------------------------------------------------ */
 /* Equipment list (collected while browsing, remembered on this device) */
 /* ------------------------------------------------------------------ */
 
-// Everything that can go on the list: the translation key for its name and its photo.
+// Everything that can go on the list or open in the quick view. Text is translation keys;
+// images are relative to this page. `services` are the finder's service groups (what it suits),
+// `related` is what the quick view suggests next.
 const CATALOG = {
-  hydrafacial: { key: 'cat.1t', img: 'assets/categories/Product%20image.png' },
-  steamer: { key: 'cat.2t', img: 'assets/categories/Product%20image%20(2).png' },
-  dryer: { key: 'cat.3t', img: 'assets/categories/Product%20image%20(3).png' },
-  straightener: { key: 'cat.4t', img: 'assets/categories/Product%20image%20(1).png' },
-  machinery: { key: 'cat.5t', img: 'assets/categories/Product%20image%20(4).png' },
-  'facial-platform': { key: 'feat.1t', img: 'assets/featured/Product%20image.png' },
-  'steamer-lamp': { key: 'feat.2t', img: 'assets/featured/Product%20image%20(1).png' },
-  'styling-kit': { key: 'feat.3t', img: 'assets/featured/Product%20image%20(2).png' },
+  hydrafacial: {
+    key: 'cat.1t', desc: 'cat.1d', tag: 'cat.1tag', img: `${ROOT}assets/categories/Product%20image.png`,
+    services: ['facials'], related: ['facial-platform', 'steamer-lamp', 'steamer'],
+  },
+  steamer: {
+    key: 'cat.2t', desc: 'cat.2d', tag: 'cat.2tag', img: `${ROOT}assets/categories/Product%20image%20(2).png`,
+    services: ['skin'], related: ['steamer-lamp', 'hydrafacial', 'machinery'],
+  },
+  dryer: {
+    key: 'cat.3t', desc: 'cat.3d', tag: 'cat.3tag', img: `${ROOT}assets/categories/Product%20image%20(3).png`,
+    services: ['drying'], related: ['straightener', 'styling-kit'],
+  },
+  straightener: {
+    key: 'cat.4t', desc: 'cat.4d', tag: 'cat.4tag', img: `${ROOT}assets/categories/Product%20image%20(1).png`,
+    services: ['styling'], related: ['dryer', 'styling-kit'],
+  },
+  machinery: {
+    key: 'cat.5t', desc: 'cat.5d', tag: 'cat.5tag', img: `${ROOT}assets/categories/Product%20image%20(4).png`,
+    services: ['room'], related: ['steamer', 'steamer-lamp', 'hydrafacial'],
+  },
+  'facial-platform': {
+    key: 'feat.1t', desc: 'feat.1d', tag: 'feat.1tag', img: `${ROOT}assets/featured/Product%20image.png`,
+    chips: ['feat.1c1', 'feat.1c2', 'feat.1c3'], services: ['facials'], related: ['hydrafacial', 'steamer-lamp', 'machinery'],
+  },
+  'steamer-lamp': {
+    key: 'feat.2t', desc: 'feat.2d', tag: 'feat.2tag', img: `${ROOT}assets/featured/Product%20image%20(1).png`,
+    chips: ['feat.2c1', 'feat.2c2', 'feat.2c3'], services: ['skin'], related: ['steamer', 'facial-platform', 'machinery'],
+  },
+  'styling-kit': {
+    key: 'feat.3t', desc: 'feat.3d', tag: 'feat.3tag', img: `${ROOT}assets/featured/Product%20image%20(2).png`,
+    chips: ['feat.3c1', 'feat.3c2', 'feat.3c3'], services: ['drying', 'styling'], related: ['dryer', 'straightener'],
+  },
 };
+// The finder's labels for each service group (the finder is on every page).
+const SERVICE_LABELS = { facials: 'finder.s1', skin: 'finder.s2', drying: 'finder.s3', styling: 'finder.s4', room: 'finder.s5' };
 const LIST_KEY = 'axion-list';
 
 const shortlist = document.querySelector('.shortlist');
@@ -414,20 +542,24 @@ const itemName = (id) => plain(CATALOG[id].key);
 
 let list = [];
 try { list = JSON.parse(localStorage.getItem(LIST_KEY)) || []; } catch (e) { list = []; }
-list = list.filter((id) => CATALOG[id]);
+list = list.filter((id) => Object.hasOwn(CATALOG, id));
 
 function announce(message) {
   listStatus.textContent = message;
 }
 
-function renderList() {
-  try { localStorage.setItem(LIST_KEY, JSON.stringify(list)); } catch (e) { /* storage unavailable */ }
-
+function syncAddButtons() {
   document.querySelectorAll('[data-add]').forEach((btn) => {
     const id = btn.dataset.add;
     btn.setAttribute('aria-pressed', String(list.includes(id)));
     btn.setAttribute('aria-label', `${plain('list.add')}: ${itemName(id)}`);
   });
+}
+
+function renderList() {
+  try { localStorage.setItem(LIST_KEY, JSON.stringify(list)); } catch (e) { /* storage unavailable */ }
+
+  syncAddButtons();
 
   shortlist.hidden = list.length === 0;
   if (!list.length) setListPanel(false);
@@ -488,8 +620,18 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Fill the quote form's equipment field, then bring the form into view.
+const PREFILL_KEY = 'axion-prefill';
+
+// Fill the quote form's equipment field and bring the form into view. On other pages,
+// carry the text over to the contact page, which fills it in on arrival.
 function goToQuote(equipment) {
+  if (!form) {
+    try { sessionStorage.setItem(PREFILL_KEY, equipment); } catch (e) { /* storage unavailable */ }
+    const url = `${ROOT}contact/`;
+    // motion.js plays the page transition when it is running.
+    if (document.dispatchEvent(new CustomEvent('axion:navigate', { detail: { url }, cancelable: true }))) location.href = url;
+    return;
+  }
   const field = form.querySelector('[name="equipment"]');
   field.value = equipment;
   field.removeAttribute('aria-invalid');
@@ -498,7 +640,7 @@ function goToQuote(equipment) {
   if (document.dispatchEvent(new CustomEvent('axion:goto', { detail: { target }, cancelable: true }))) {
     target.scrollIntoView({ behavior: 'smooth' });
   }
-  const firstEmpty = [...form.querySelectorAll('input[required]')].find((input) => !input.value.trim());
+  const firstEmpty = [...form.querySelectorAll('[required]')].find((input) => !input.value.trim());
   (firstEmpty || field).focus({ preventScroll: true });
 }
 
@@ -551,7 +693,7 @@ function renderPicks() {
     if (!picks.some((p) => p.id === id)) picks.push({ id, service });
   }));
   const serviceLabel = (service) => optionLabel(finderForm.querySelector(`[name="services"][value="${service}"]`));
-  finder.querySelector('.finder__summary').textContent = [checkedLabel('goal'), checkedLabel('load')].filter(Boolean).join(' · ');
+  finder.querySelector('.finder__summary').textContent = [checkedLabel('goal'), checkedLabel('load')].filter(Boolean).join(', ');
   picksEl.innerHTML = picks.map(({ id, service }) => `
     <li>
       <label class="pick">
@@ -594,11 +736,19 @@ function showStep(next) {
   document.dispatchEvent(new CustomEvent('axion:finderstep', { detail: { step, dir, el: steps[step - 1] } }));
 }
 
-function openFinder() {
+// With a goal (from the home page's "What are you planning?"), the first question is already answered.
+function openFinder(goal) {
   hideNudge(true);
   if (finder.open) return;
   finderForm.reset();
-  showStep(1);
+  const goalInput = goal && finderForm.querySelector(`[name="goal"][value="${goal}"]`);
+  if (goalInput) {
+    goalInput.checked = true;
+    finderForm.querySelectorAll('[name="services"]').forEach((input) => { input.checked = GOAL_SERVICES[goal].includes(input.value); });
+    showStep(2);
+  } else {
+    showStep(1);
+  }
   finder.showModal();
   document.documentElement.classList.add('finder-open');
   document.dispatchEvent(new CustomEvent('axion:finder', { detail: { open: true } }));
@@ -625,6 +775,8 @@ finder.addEventListener('click', (e) => {
 
 document.addEventListener('click', (e) => {
   if (e.target.closest('[data-finder-open]')) openFinder();
+  const goal = e.target.closest('[data-finder-goal]');
+  if (goal) openFinder(goal.dataset.finderGoal);
 });
 finder.querySelector('[data-finder-close]').addEventListener('click', closeFinder);
 finder.querySelector('[data-finder-back]').addEventListener('click', () => showStep(step - 1));
@@ -680,30 +832,197 @@ function hideNudge(remember) {
 
 nudge.querySelector('.nudge__close').addEventListener('click', () => hideNudge(true));
 
-// Offer it when the visitor reaches the featured products with nothing on their list yet.
-if ('IntersectionObserver' in window) {
+// Offer it when the visitor reaches a product grid (marked data-nudge) with nothing on their list yet.
+const nudgeTriggers = document.querySelectorAll('[data-nudge]');
+if ('IntersectionObserver' in window && nudgeTriggers.length) {
   const watch = new IntersectionObserver((entries) => {
     if (!entries.some((entry) => entry.isIntersecting)) return;
     watch.disconnect();
     setTimeout(() => {
       if (nudgeSeen || list.length || finder.open || document.documentElement.classList.contains('menu-open')) return;
       nudge.hidden = false;
+      // Counted as seen once shown, so it doesn't follow the visitor from page to page.
+      try { sessionStorage.setItem(FINDER_KEY, '1'); } catch (e) { /* storage unavailable */ }
     }, 700);
   }, { threshold: 0.25 });
-  watch.observe(document.getElementById('solutions'));
+  nudgeTriggers.forEach((el) => watch.observe(el));
 }
 // Hide it again once the visitor reaches the quote form.
-if ('IntersectionObserver' in window) {
+const inquirySection = document.getElementById('inquiry');
+if ('IntersectionObserver' in window && inquirySection) {
   new IntersectionObserver((entries) => {
     if (entries.some((entry) => entry.isIntersecting)) hideNudge(false);
-  }).observe(document.getElementById('inquiry'));
+  }).observe(inquirySection);
+}
+
+/* ------------------------------------------------------------------ */
+/* Product quick view                                                  */
+/* ------------------------------------------------------------------ */
+
+const qv = document.getElementById('quickview');
+const qvAdd = qv.querySelector('.qv__add');
+let qvId = null;
+
+function renderQuickView(id) {
+  const item = CATALOG[id];
+  qvId = id;
+  qv.querySelector('.qv__img').src = item.img;
+  qv.querySelector('.qv__tag').textContent = plain(item.tag);
+  qv.querySelector('.qv__title').textContent = itemName(id);
+  qv.querySelector('.qv__desc').textContent = plain(item.desc);
+  const chipsEl = qv.querySelector('.qv__chips');
+  chipsEl.hidden = !item.chips;
+  chipsEl.innerHTML = (item.chips || []).map((k) => `<li>${esc(plain(k))}</li>`).join('');
+  qv.querySelector('.qv__services').innerHTML = item.services
+    .map((service) => `<li><svg class="icon"><use href="#i-check"/></svg>${esc(plain(SERVICE_LABELS[service]))}</li>`).join('');
+  qv.querySelector('.qv__related').innerHTML = item.related.map((rid) => `
+    <li><button type="button" class="qv__rel" data-qv="${rid}">
+      <img src="${CATALOG[rid].img}" alt="">
+      <span>${esc(itemName(rid))}</span>
+      <svg class="icon"><use href="#i-arrow-right"/></svg>
+    </button></li>`).join('');
+  qvAdd.dataset.add = id;
+  qv.querySelector('.qv__ask').href = `${ROOT}contact/?equipment=${id}`;
+  syncAddButtons();
+}
+
+// Opening another product while the panel is up swaps its contents (motion.js animates either way).
+function openQuickView(id) {
+  if (!Object.hasOwn(CATALOG, id)) return;
+  const swapping = qv.open;
+  renderQuickView(id);
+  if (swapping) {
+    qv.querySelector('.qv__panel').scrollTop = 0;
+    document.dispatchEvent(new CustomEvent('axion:qvswap'));
+    return;
+  }
+  qv.showModal();
+  document.documentElement.classList.add('qv-open');
+  document.dispatchEvent(new CustomEvent('axion:qv', { detail: { open: true } }));
+}
+
+function closeQuickView() {
+  if (!qv.open) return;
+  if (document.dispatchEvent(new CustomEvent('axion:qvclose', { cancelable: true }))) qv.close();
+}
+
+// Product cards keep their link to the contact page for visitors without scripts.
+document.addEventListener('click', (e) => {
+  const trigger = e.target.closest('[data-qv]');
+  if (!trigger || e.metaKey || e.ctrlKey || e.shiftKey) return;
+  e.preventDefault();
+  openQuickView(trigger.dataset.qv);
+});
+qv.addEventListener('close', () => {
+  document.documentElement.classList.remove('qv-open');
+  document.dispatchEvent(new CustomEvent('axion:qv', { detail: { open: false } }));
+});
+qv.addEventListener('cancel', (e) => {
+  e.preventDefault();
+  closeQuickView();
+});
+qv.addEventListener('click', (e) => {
+  if (e.target === qv) closeQuickView();
+});
+qv.querySelector('[data-qv-close]').addEventListener('click', closeQuickView);
+// Leaving for the contact page: drop the panel first so the page transition can be seen.
+qv.querySelector('.qv__ask').addEventListener('click', () => qv.close());
+
+/* ------------------------------------------------------------------ */
+/* Showroom position (when it scrolls natively, on touch screens)      */
+/* ------------------------------------------------------------------ */
+
+const showroom = document.querySelector('.showroom');
+if (showroom) {
+  const viewport = showroom.querySelector('.showroom__viewport');
+  const slides = [...showroom.querySelectorAll('.showroom__slide')];
+  viewport.addEventListener('scroll', () => {
+    const max = viewport.scrollWidth - viewport.clientWidth;
+    const progress = max > 0 ? viewport.scrollLeft / max : 0;
+    showroom.querySelector('.showroom__index').textContent = Math.round(progress * (slides.length - 1)) + 1;
+    showroom.style.setProperty('--progress', progress.toFixed(3));
+  }, { passive: true });
+}
+
+/* ------------------------------------------------------------------ */
+/* Wholesale: kind-of-order tabs and the brief builder                 */
+/* ------------------------------------------------------------------ */
+
+const briefForm = document.querySelector('.brief__form');
+
+function updateBrief() {
+  if (!briefForm) return;
+  const lines = [...briefForm.querySelectorAll('fieldset')].map((group) => {
+    const values = [...group.querySelectorAll('input:checked')].map((input) => input.closest('label').textContent.trim());
+    return values.length ? [group.querySelector('legend').textContent.trim(), values.join(', ')] : null;
+  }).filter(Boolean);
+  const city = briefForm.querySelector('[name="city"]');
+  if (city.value.trim()) lines.push([city.closest('label').querySelector('span').textContent.trim(), city.value.trim()]);
+
+  document.querySelector('.brief__lines').innerHTML = lines
+    .map(([label, value]) => `<div class="brief__line"><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('');
+  document.querySelector('.brief__empty').hidden = lines.length > 0;
+  document.querySelector('[data-brief-send]').disabled = lines.length === 0;
+  return lines;
+}
+
+if (briefForm) {
+  briefForm.addEventListener('input', updateBrief);
+  briefForm.addEventListener('submit', (e) => e.preventDefault());
+  document.querySelector('[data-brief-send]').addEventListener('click', () => {
+    goToQuote(updateBrief().map(([label, value]) => `${label}: ${value}`).join('\n'));
+  });
+}
+
+const buyer = document.querySelector('[data-buyer]');
+if (buyer) {
+  const tabs = [...buyer.querySelectorAll('[role="tab"]')];
+  const selectTab = (tab, focus) => {
+    tabs.forEach((other) => {
+      const on = other === tab;
+      other.setAttribute('aria-selected', String(on));
+      other.tabIndex = on ? 0 : -1;
+      document.getElementById(other.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focus) tab.focus();
+    // The brief below starts from the same kind of order.
+    const match = briefForm?.querySelector(`[name="buyer"][value="${tab.dataset.value}"]`);
+    if (match) {
+      match.checked = true;
+      updateBrief();
+    }
+    document.dispatchEvent(new CustomEvent('axion:tab', { detail: { panel: document.getElementById(tab.getAttribute('aria-controls')) } }));
+  };
+  tabs.forEach((tab) => tab.addEventListener('click', () => selectTab(tab)));
+  buyer.querySelector('[role="tablist"]').addEventListener('keydown', (e) => {
+    const i = tabs.indexOf(document.activeElement);
+    const next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+    if (i < 0 || next === undefined) return;
+    e.preventDefault();
+    selectTab(tabs[(next + tabs.length) % tabs.length], true);
+  });
 }
 
 // Text built by the script follows the language switch.
 document.addEventListener('axion:lang', () => {
   renderList();
+  if (qv.open) renderQuickView(qvId);
+  updateBrief();
   if (step === 4) renderPicks();
   finder.querySelector('.finder__next-label').textContent = t(step === 3 ? 'finder.see' : 'finder.next');
 });
 
 renderList();
+
+// On the contact page, fill "Equipment needed" from the list or finder (carried over from
+// another page) or from a product link such as contact/?equipment=hydrafacial.
+if (form) {
+  let prefill = '';
+  try {
+    prefill = sessionStorage.getItem(PREFILL_KEY) || '';
+    sessionStorage.removeItem(PREFILL_KEY);
+  } catch (e) { /* storage unavailable */ }
+  const linked = new URLSearchParams(location.search).get('equipment');
+  if (!prefill && Object.hasOwn(CATALOG, linked || '')) prefill = itemName(linked);
+  if (prefill) form.querySelector('[name="equipment"]').value = prefill;
+}

@@ -1,0 +1,78 @@
+<!--
+path: contact/
+page: contact
+nav: contact
+title: Contact — Axion Bangladesh
+description: Request a wholesale quote from Axion Bangladesh. Share the equipment type, intended use and quantity you are considering.
+-->
+  <!-- Inquiry -->
+  <section class="inquiry" id="inquiry">
+    <div class="container">
+      <div class="inquiry__grid">
+        <div class="inquiry__content">
+          <nav class="crumbs crumbs--light" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="{{root}}" data-i18n="crumb.home">Home</a></li>
+              <li><span aria-current="page" data-i18n="nav.contact">Contact</span></li>
+            </ol>
+          </nav>
+          <p class="eyebrow eyebrow--light" data-i18n="inq.eyebrow">Wholesale inquiry</p>
+          <h1 class="h2" data-i18n="inq.title">Tell us what your business<br> needs next.</h1>
+          <p class="inquiry__lead" data-i18n="inq.lead">Send the equipment type, intended use and quantity you are considering. Axion Bangladesh can then structure a more useful product and sourcing conversation.</p>
+          <ul class="inquiry__types">
+            <li><svg class="icon"><use href="#i-circle-check"/></svg><span data-i18n="inq.type1">New salon setup</span></li>
+            <li><svg class="icon"><use href="#i-circle-check"/></svg><span data-i18n="inq.type2">Equipment refresh</span></li>
+            <li><svg class="icon"><use href="#i-circle-check"/></svg><span data-i18n="inq.type3">Reseller order</span></li>
+          </ul>
+        </div>
+
+        <form class="quote" id="quote-form" novalidate>
+          <div class="quote__head">
+            <div>
+              <h3 data-i18n="form.title">Request a wholesale quote</h3>
+              <p data-i18n="form.sub">Start with the basics. We’ll follow up for the details.</p>
+            </div>
+            <span class="quote__icon"><svg class="icon"><use href="#i-file-text"/></svg></span>
+          </div>
+          <div class="quote__row">
+            <label class="field">
+              <span data-i18n="form.business">Business name</span>
+              <input type="text" name="business" autocomplete="organization" required data-i18n-ph="form.businessPh" placeholder="Your salon or company">
+            </label>
+            <label class="field">
+              <span data-i18n="form.contact">Contact person</span>
+              <input type="text" name="contact" autocomplete="name" required data-i18n-ph="form.contactPh" placeholder="Full name">
+            </label>
+          </div>
+          <label class="field">
+            <span data-i18n="form.equipment">Equipment needed</span>
+            <textarea name="equipment" rows="3" required data-i18n-ph="form.equipmentPh" placeholder="e.g. facial system, steamer, hair tools"></textarea>
+          </label>
+          <label class="field">
+            <span data-i18n="form.preferred">Preferred contact</span>
+            <input type="text" name="preferred" required data-i18n-ph="form.preferredPh" placeholder="Phone, WhatsApp or email">
+          </label>
+          <div class="quote__foot">
+            <p class="quote__privacy" data-i18n="form.privacy">Share only the information needed for a business inquiry.</p>
+            <button type="submit" class="btn btn--primary btn--lg"><span data-i18n="form.send">Send inquiry</span><svg class="icon"><use href="#i-send"/></svg></button>
+          </div>
+          <p class="quote__status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div class="contacts">
+        <div class="contact">
+          <span class="contact__icon"><svg class="icon"><use href="#i-phone"/></svg></span>
+          <div><p class="contact__label" data-i18n="ct.phoneLabel">Business phone</p><p data-i18n="ct.phone">Add confirmed phone number</p></div>
+        </div>
+        <div class="contact">
+          <span class="contact__icon"><svg class="icon"><use href="#i-mail"/></svg></span>
+          <div><p class="contact__label" data-i18n="ct.emailLabel">Wholesale email</p><p data-i18n="ct.email">Add confirmed business email</p></div>
+        </div>
+        <div class="contact">
+          <span class="contact__icon"><svg class="icon"><use href="#i-map-pin"/></svg></span>
+          <div><p class="contact__label" data-i18n="ct.officeLabel">Office or showroom</p><p data-i18n="ct.office">Add confirmed Bangladesh address</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
